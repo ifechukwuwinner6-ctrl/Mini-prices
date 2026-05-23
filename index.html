@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NairaPrice - Smart Search Engine</title>
+  
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f4f7f6;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    p.subtitle {
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .search-container {
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 30px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 14px;
+      border: 2px solid #ddd;
+      border-radius: 30px;
+      font-size: 16px;
+      outline: none;
+      padding-left: 20px;
+    }
+
+    .search-input:focus {
+      border-color: #3bb75e;
+    }
+
+    .search-btn {
+      background-color: #3bb75e;
+      color: white;
+      border: none;
+      padding: 0 25px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Container where search results will pop up dynamically */
+    #results-wrapper {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+    }
+
+    .product-image {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .product-title {
+      font-size: 20px;
+      color: #1a1a1a;
+      margin: 15px 0 5px 0;
+    }
+
+    .deal-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .store-name { font-weight: 700; }
+    .price-tag { color: #2ecc71; font-weight: 600; }
+
+    .redirect-btn {
+      text-decoration: none;
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .jumia { background-color: #f68b1e; }
+    .jiji { background-color: #3bb75e; }
+  </style>
+</head>
+<body>
+
+  <h1>NairaPrice</h1>
+  <p class="subtitle">Find the absolute cheapest deals in Nigeria instantly</p>
+
+  <div class="search-container">
+    <input type="text" id="user-search" class="search-input" placeholder="What are you looking for?">
+    <button id="search-button" class="search-btn">Search</button>
+  </div>
+
+  <div id="results-wrapper"></div>
+
+  <script>
+    const searchBtn = document.getElementById('search-button');
+    const searchInput = document.getElementById('user-search');
+    const resultsWrapper = document.getElementById('results-wrapper');
+
+    searchBtn.addEventListener('click', function() {
+      const query = searchInput.value;
+      if (query === "") return alert("Please enter an item name!");
+
+      resultsWrapper.innerHTML = "<p style='text-align:center;'>Searching Jumia and Jiji live database...</p>";
+
+      // JavaScript fetches information from your Python backend application
+      // (Replace 'your-python-backend-link' later with your cloud server address)
+      fetch(`https://your-python-backend-link.com/search?item=${query}`)
+        .then(response => response.json())
+        .then(data => {
+          resultsWrapper.innerHTML = ""; // Clear searching message
+          
+          // Loop through the data python gathered and inject it into the HTML interface
+          data.forEach(product => {
+            const cardHTML = `
+              <div class="product-card">
+                <img src="${product.image}" class="product-image">
+                <h3 class="product-title">${product.name}</h3>
+                
+                <div class="deal-row">
+                  <div>
+                    <span class="store-name">Jumia Price</span>
+                    <div class="price-tag">₦${product.jumiaPrice}</div>
+                  </div>
+                  <a href="${product.jumiaLink}" target="_blank" class="redirect-btn jumia">Buy Now</a>
+                </div>
+
+                <div class="deal-row">
+                  <div>
+                    <span class="store-name">Jiji Price</span>
+                    <div class="price-tag">₦${product.jijiPrice}</div>
+                  </div>
+                  <a href="${product.jijiLink}" target="_blank" class="redirect-btn jiji">Buy Now</a>
+                </div>
+              </div>
+            `;
+            resultsWrapper.innerHTML += cardHTML;
+          });
+        })
+        .catch(error => {
+          resultsWrapper.innerHTML = "<p style='color:red;'>Failed to fetch live prices. Using template sneaker instead.</p>";
+          console.error("Error:", error);
+        });
+    });
+  </script>
+
+</body>
+</html>
