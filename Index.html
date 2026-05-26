@@ -9,7 +9,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
         
         body {
@@ -19,7 +19,7 @@
             width: 100%;
         }
 
-        /* Full-Width Jiji Style Green Header */
+        /* Jiji Style Full Width Green Header */
         .main-header {
             background-color: #3bb371;
             padding: 16px;
@@ -52,7 +52,7 @@
             font-weight: 500;
         }
 
-        /* Full-Width Search Bar Box */
+        /* Search Layout Container */
         .search-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -70,7 +70,6 @@
             outline: none;
             color: #000000;
             width: 100%;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .search-button {
@@ -82,14 +81,9 @@
             font-size: 15px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
         }
 
-        .search-button:hover {
-            background-color: #260e3d;
-        }
-
-        /* Full-Screen Web Background Content Container */
+        /* Full Screen Web Layout Wrapper */
         .page-wrapper {
             max-width: 1200px;
             margin: 0 auto;
@@ -97,29 +91,19 @@
             width: 100%;
         }
 
-        /* Welcome Banner */
         .promo-banner {
             background: linear-gradient(135deg, #2e8b57, #3bb371);
             border-radius: 16px;
-            padding: 24px;
+            padding: 20px;
             color: white;
             margin-bottom: 24px;
-            box-shadow: 0 4px 12px rgba(59, 179, 113, 0.2);
         }
 
         .promo-banner h2 {
-            font-size: 22px;
+            font-size: 20px;
             margin-bottom: 6px;
-            font-weight: 700;
         }
 
-        .promo-banner p {
-            font-size: 14px;
-            opacity: 0.9;
-            line-height: 1.4;
-        }
-
-        /* Section Layout Style */
         .layout-section {
             background: #ffffff;
             border-radius: 16px;
@@ -131,14 +115,10 @@
         .section-heading {
             font-size: 18px;
             font-weight: 700;
-            color: #1c1c1e;
             margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
 
-        /* Jiji Style Grid Layout System */
+        /* Jiji Grid Grid System for the whole background */
         .jiji-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
@@ -147,47 +127,33 @@
 
         @media (max-width: 480px) {
             .jiji-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 items per row nicely on small phones */
+                grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
         }
 
-        /* Visual Product Cards */
+        /* Clickable Item Cards */
         .market-card {
             background: #ffffff;
             border: 1px solid #e5e5ea;
             border-radius: 14px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
             flex-direction: column;
             height: 100%;
         }
 
-        .market-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-            border-color: #3bb371;
-        }
-
         .image-box {
             width: 100%;
-            height: 130px;
+            height: 120px;
             background-color: #f8f9fa;
-            position: relative;
-            overflow: hidden;
         }
 
         .image-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .market-card:hover .image-box img {
-            transform: scale(1.05);
         }
 
         .card-info {
@@ -197,17 +163,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #ffffff;
         }
 
         .card-title {
             font-size: 13px;
             font-weight: 600;
             color: #3a3a3c;
-            line-height: 1.3;
         }
 
-        /* Results Screen Layout Components */
         .loader {
             text-align: center;
             display: none;
@@ -226,62 +189,24 @@
             font-weight: 600;
             cursor: pointer;
             margin-bottom: 16px;
-            font-size: 14px;
         }
 
         .product-item-box {
             border: 1px solid #e5e5ea;
             border-radius: 16px;
-            padding: 20px;
+            padding: 16px;
             background: #ffffff;
             margin-top: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-        }
-
-        .product-meta-header {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            margin-bottom: 16px;
-            border-bottom: 1px solid #f2f2f7;
-            padding-bottom: 14px;
-        }
-
-        .product-thumb {
-            width: 70px;
-            height: 70px;
-            object-fit: contain;
-            border-radius: 8px;
-            background: #f8f9fa;
-        }
-
-        .product-main-title {
-            font-size: 18px;
-            color: #1c1c1e;
-            font-weight: 700;
         }
 
         .comparison-row {
             background: #f8f9fa;
             border-radius: 12px;
-            padding: 14px 16px;
+            padding: 12px;
             margin-top: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        
-        .platform-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c2c2e;
-        }
-
-        .platform-price {
-            font-size: 16px;
-            font-weight: 700;
-            color: #3bb371;
-            margin-top: 2px;
         }
 
         .view-deal-btn {
@@ -303,7 +228,7 @@
         <div class="brand-subtitle">Smart Deal Finder</div>
     </div>
     <div class="search-container">
-        <input type="text" id="itemInput" class="search-input" placeholder="I am looking for...">
+        <input type="text" id="itemInput" class="search-input" placeholder="What are you looking for today?">
         <button class="search-button" onclick="searchProduct('')">Search</button>
     </div>
 </header>
@@ -311,112 +236,89 @@
 <div class="page-wrapper">
     
     <div id="dashboardView">
-        
         <div class="promo-banner">
-            <h2>Welcome to the Hub!</h2>
-            <p>Compare prices live across Jumia, Jiji, Konga, AliExpress, and Amazon. Click on any of the trending layouts below to begin searching instantly.</p>
+            <h2>Compare Prices Live!</h2>
+            <p>Click any category layout below to view products and see price differences immediately.</p>
         </div>
 
         <div class="layout-section">
-            <div class="section-heading">Trending Categories</div>
+            <div class="section-heading">Trending Framework Layouts</div>
             
             <div class="jiji-grid">
-                
-                <div class="market-card" onclick="searchProduct('Laptops & Computers')">
+                <div class="market-card" onclick="searchProduct('Laptops')">
                     <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&auto=format&fit=crop&q=60" alt="Laptops">
+                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400" alt="Laptops">
                     </div>
-                    <div class="card-info">
-                        <div class="card-title">Laptops & Computers</div>
-                    </div>
+                    <div class="card-info"><div class="card-title">Laptops & Computers</div></div>
                 </div>
 
-                <div class="market-card" onclick="searchProduct('Sneakers & Shoes')">
+                <div class="market-card" onclick="searchProduct('Shoes')">
                     <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&auto=format&fit=crop&q=60" alt="Shoes">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" alt="Shoes">
                     </div>
-                    <div class="card-info">
-                        <div class="card-title">Sneakers & Shoes</div>
-                    </div>
+                    <div class="card-info"><div class="card-title">Sneakers & Shoes</div></div>
                 </div>
 
-                <div class="market-card" onclick="searchProduct('Fashion Clothing')">
+                <div class="market-card" onclick="searchProduct('Clothes')">
                     <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&auto=format&fit=crop&q=60" alt="Clothes">
+                        <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400" alt="Clothes">
                     </div>
-                    <div class="card-info">
-                        <div class="card-title">Fashion Clothing</div>
-                    </div>
+                    <div class="card-info"><div class="card-title">Fashion Clothing</div></div>
                 </div>
 
-                <div class="market-card" onclick="searchProduct('Vehicles & Cars')">
+                <div class="market-card" onclick="searchProduct('Cars')">
                     <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&auto=format&fit=crop&q=60" alt="Cars">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400" alt="Cars">
                     </div>
-                    <div class="card-info">
-                        <div class="card-title">Vehicles & Cars</div>
-                    </div>
+                    <div class="card-info"><div class="card-title">Vehicles & Cars</div></div>
                 </div>
 
-                <div class="market-card" onclick="searchProduct('Property & Houses')">
+                <div class="market-card" onclick="searchProduct('Houses')">
                     <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&auto=format&fit=crop&q=60" alt="Houses">
+                        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400" alt="Houses">
                     </div>
-                    <div class="card-info">
-                        <div class="card-title">Property & Houses</div>
-                    </div>
+                    <div class="card-info"><div class="card-title">Property & Houses</div></div>
                 </div>
 
-                <div class="market-card" onclick="searchProduct('Solar Panels & Power')">
+                <div class="market-card" onclick="searchProduct('Solar Panels')">
                     <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&auto=format&fit=crop&q=60" alt="Solar">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400" alt="Solar">
                     </div>
-                    <div class="card-info">
-                        <div class="card-title">Solar & Power Systems</div>
-                    </div>
+                    <div class="card-info"><div class="card-title">Solar & Power Systems</div></div>
                 </div>
 
-                <div class="market-card" onclick="searchProduct('Smart Television TV')">
+                <div class="market-card" onclick="searchProduct('Television')">
                     <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400&auto=format&fit=crop&q=60" alt="TV">
+                        <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400" alt="TV">
                     </div>
-                    <div class="card-info">
-                        <div class="card-title">Smart Televisions</div>
-                    </div>
+                    <div class="card-info"><div class="card-title">Smart Televisions</div></div>
                 </div>
 
-                <div class="market-card" onclick="searchProduct('Power Generators')">
+                <div class="market-card" onclick="searchProduct('Generators')">
                     <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?w=400&auto=format&fit=crop&q=60" alt="Generators">
+                        <img src="https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?w=400" alt="Generators">
                     </div>
-                    <div class="card-info">
-                        <div class="card-title">Power Generators</div>
-                    </div>
+                    <div class="card-info"><div class="card-title">Power Generators</div></div>
                 </div>
 
                 <div class="market-card" onclick="searchProduct('Power Banks')">
                     <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1609592424087-0bc39e1bc9fb?w=400&auto=format&fit=crop&q=60" alt="Power Banks">
+                        <img src="https://images.unsplash.com/photo-1609592424087-0bc39e1bc9fb?w=400" alt="Power Banks">
                     </div>
-                    <div class="card-info">
-                        <div class="card-title">High Capacity Power Banks</div>
-                    </div>
+                    <div class="card-info"><div class="card-title">Power Banks</div></div>
                 </div>
 
-                <div class="market-card" onclick="searchProduct('Headsets & Headphones')">
+                <div class="market-card" onclick="searchProduct('Headsets')">
                     <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&auto=format&fit=crop&q=60" alt="Headsets">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" alt="Headsets">
                     </div>
-                    <div class="card-info">
-                        <div class="card-title">Headsets & Headphones</div>
-                    </div>
+                    <div class="card-info"><div class="card-title">Headsets & Headphones</div></div>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <div id="loadingStatus" class="loader">Scouting retail deals... 🔍</div>
+    <div id="loadingStatus" class="loader">Hunting down best retail deals... 🔍</div>
     <div id="resultsWrapper"></div>
 </div>
 
@@ -430,7 +332,7 @@ function searchProduct(targetCategory) {
     let finalQuery = targetCategory ? targetCategory : inputVal;
     
     if (!finalQuery) {
-        alert("Please search an item or select a card!");
+        alert("Please enter a product name or click a category block!");
         return;
     }
     
@@ -438,12 +340,8 @@ function searchProduct(targetCategory) {
     resultsWrapper.innerHTML = '';
     dashboardView.style.display = 'none'; 
     
-    let url = 'https://mini-prices-backend.onrender.com/search?';
-    if (targetCategory) {
-        url += 'category=' + encodeURIComponent(targetCategory);
-    } else {
-        url += 'item=' + encodeURIComponent(inputVal);
-    }
+    // Calls your live Render application service
+    let url = 'https://mini-prices-backend.onrender.com/search?item=' + encodeURIComponent(finalQuery);
     
     fetch(url)
         .then(response => response.json())
@@ -451,67 +349,42 @@ function searchProduct(targetCategory) {
             loadingStatus.style.display = 'none';
             
             resultsWrapper.innerHTML = `
-                <button class="back-btn" onclick="window.location.reload()">← Return to Dashboard</button>
+                <button class="back-btn" onclick="window.location.reload()">← Go Back Home</button>
                 <div class="layout-section">
-                    <div class="section-heading">Deals Found for "${finalQuery}"</div>
+                    <div class="section-heading">Results Found for "${finalQuery}"</div>
                     <div id="cardsInsertionPoint"></div>
                 </div>
             `;
             
             const insertionPoint = document.getElementById('cardsInsertionPoint');
             
-            if (!data || data.length === 0) {
-                insertionPoint.innerHTML = `<div style='text-align:center; padding:20px; color:#ef4444; font-weight:bold;'>No matches located right now. Try searching another product keyword!</div>`;
+            if (!data || data.length === 0 || data.error) {
+                insertionPoint.innerHTML = `<div style='text-align:center; padding:20px; color:#ef4444; font-weight:bold;'>No matches located. Try another keyword!</div>`;
                 return;
             }
             
             data.forEach(product => {
-                const cleanTerm = encodeURIComponent(product.searchWord);
                 insertionPoint.innerHTML += `
                     <div class="product-item-box">
-                        <div class="product-meta-header">
-                            <img class="product-thumb" src="${product.image}" alt="Product image">
-                            <div class="product-main-title">${product.name}</div>
+                        <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
+                           <img src="${product.image}" style="width:60px; height:60px; object-fit:contain; background:#f4f4f5; border-radius:8px;">
+                           <strong style="font-size:16px;">${product.name}</strong>
                         </div>
                         
                         <div class="comparison-row">
                             <div>
-                                <div class="platform-name">Jumia Nigeria</div>
-                                <div class="platform-price">₦ ${product.jumiaPrice}</div>
+                                <span style="font-size:12px; color:#666;">Jumia Nigeria</span>
+                                <div style="font-weight:700; color:#e37613;">₦ ${product.jumiaPrice}</div>
                             </div>
-                            <a class="view-deal-btn" style="background-color: #f68b1e;" href="https://www.jumia.com.ng/catalog/?q=${cleanTerm}" target="_blank">View</a>
+                            <a class="view-deal-btn" style="background:#e37613;" href="https://www.jumia.com.ng/catalog/?q=${encodeURIComponent(product.searchWord)}" target="_blank">View on Jumia</a>
                         </div>
                         
                         <div class="comparison-row">
                             <div>
-                                <div class="platform-name">Jiji Nigeria</div>
-                                <div class="platform-price">${product.jijiPrice}</div>
+                                <span style="font-size:12px; color:#666;">Jiji Market</span>
+                                <div style="font-weight:700; color:#3bb371;">${product.jijiPrice}</div>
                             </div>
-                            <a class="view-deal-btn" style="background-color: #3bb371;" href="https://jiji.ng/search?query=${cleanTerm}" target="_blank">Compare</a>
-                        </div>
-
-                        <div class="comparison-row">
-                            <div>
-                                <div class="platform-name">Konga Mall</div>
-                                <div class="platform-price">₦ ${product.kongaPrice}</div>
-                            </div>
-                            <a class="view-deal-btn" style="background-color: #ba0d0d;" href="https://www.konga.com/search?search=${cleanTerm}" target="_blank">Check</a>
-                        </div>
-
-                        <div class="comparison-row">
-                            <div>
-                                <div class="platform-name">AliExpress Global</div>
-                                <div class="platform-price">${product.aliexpressPrice}</div>
-                            </div>
-                            <a class="view-deal-btn" style="background-color: #ff4747;" href="https://www.aliexpress.com/wholesale?SearchText=${cleanTerm}" target="_blank">Order</a>
-                        </div>
-
-                        <div class="comparison-row">
-                            <div>
-                                <div class="platform-name">Amazon Hub</div>
-                                <div class="platform-price">${product.amazonPrice}</div>
-                            </div>
-                            <a class="view-deal-btn" style="background-color: #ff9900;" href="https://www.amazon.com/s?k=${cleanTerm}" target="_blank">Link</a>
+                            <a class="view-deal-btn" style="background:#3bb371;" href="https://jiji.ng/search?query=${encodeURIComponent(product.searchWord)}" target="_blank">Compare on Jiji</a>
                         </div>
                     </div>
                 `;
@@ -519,11 +392,10 @@ function searchProduct(targetCategory) {
         })
         .catch(error => {
             loadingStatus.style.display = 'none';
-            resultsWrapper.innerHTML = `<div style='text-align:center; padding:20px; color:#ef4444;'>Unable to fetch response feeds. Ensure the backend server is active.</div>`;
-            console.error("Error context:", error);
+            resultsWrapper.innerHTML = `<div style='text-align:center; padding:20px; color:#ef4444;'>Connection error. Ensure your backend is running.</div>`;
+            console.error("Error:", error);
         });
 }
 </script>
-
 </body>
 </html>
