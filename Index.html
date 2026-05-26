@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini-Prices | Full-Screen Smart Hub</title>
     <style>
         * {
@@ -19,7 +19,7 @@
             width: 100%;
         }
 
-        /* Jiji Style Full Width Green Header */
+        /* Jiji Style Full Width Green Header Area */
         .main-header {
             background-color: #3bb371;
             padding: 16px;
@@ -52,7 +52,7 @@
             font-weight: 500;
         }
 
-        /* Search Layout Container */
+        /* Search Form Input Bar Container */
         .search-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -83,7 +83,7 @@
             cursor: pointer;
         }
 
-        /* Full Screen Web Layout Wrapper */
+        /* Web Page Main Box Wrapper */
         .page-wrapper {
             max-width: 1200px;
             margin: 0 auto;
@@ -118,7 +118,7 @@
             margin-bottom: 16px;
         }
 
-        /* Jiji Grid Grid System for the whole background */
+        /* Grid Framework Columns System */
         .jiji-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
@@ -132,7 +132,7 @@
             }
         }
 
-        /* Clickable Item Cards */
+        /* Clickable Grid Layout Cards */
         .market-card {
             background: #ffffff;
             border: 1px solid #e5e5ea;
@@ -238,11 +238,11 @@
     <div id="dashboardView">
         <div class="promo-banner">
             <h2>Compare Prices Live!</h2>
-            <p>Click any category layout below to view products and see price differences immediately.</p>
+            <p>Click any category layout below to view items and see immediate cost comparisons.</p>
         </div>
 
         <div class="layout-section">
-            <div class="section-heading">Trending Framework Layouts</div>
+            <div class="section-heading">Trending Categories</div>
             
             <div class="jiji-grid">
                 <div class="market-card" onclick="searchProduct('Laptops')">
@@ -260,142 +260,4 @@
                 </div>
 
                 <div class="market-card" onclick="searchProduct('Clothes')">
-                    <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400" alt="Clothes">
-                    </div>
-                    <div class="card-info"><div class="card-title">Fashion Clothing</div></div>
-                </div>
-
-                <div class="market-card" onclick="searchProduct('Cars')">
-                    <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400" alt="Cars">
-                    </div>
-                    <div class="card-info"><div class="card-title">Vehicles & Cars</div></div>
-                </div>
-
-                <div class="market-card" onclick="searchProduct('Houses')">
-                    <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400" alt="Houses">
-                    </div>
-                    <div class="card-info"><div class="card-title">Property & Houses</div></div>
-                </div>
-
-                <div class="market-card" onclick="searchProduct('Solar Panels')">
-                    <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400" alt="Solar">
-                    </div>
-                    <div class="card-info"><div class="card-title">Solar & Power Systems</div></div>
-                </div>
-
-                <div class="market-card" onclick="searchProduct('Television')">
-                    <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400" alt="TV">
-                    </div>
-                    <div class="card-info"><div class="card-title">Smart Televisions</div></div>
-                </div>
-
-                <div class="market-card" onclick="searchProduct('Generators')">
-                    <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?w=400" alt="Generators">
-                    </div>
-                    <div class="card-info"><div class="card-title">Power Generators</div></div>
-                </div>
-
-                <div class="market-card" onclick="searchProduct('Power Banks')">
-                    <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1609592424087-0bc39e1bc9fb?w=400" alt="Power Banks">
-                    </div>
-                    <div class="card-info"><div class="card-title">Power Banks</div></div>
-                </div>
-
-                <div class="market-card" onclick="searchProduct('Headsets')">
-                    <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" alt="Headsets">
-                    </div>
-                    <div class="card-info"><div class="card-title">Headsets & Headphones</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="loadingStatus" class="loader">Hunting down best retail deals... 🔍</div>
-    <div id="resultsWrapper"></div>
-</div>
-
-<script>
-function searchProduct(targetCategory) {
-    const inputVal = document.getElementById('itemInput').value.trim();
-    const resultsWrapper = document.getElementById('resultsWrapper');
-    const loadingStatus = document.getElementById('loadingStatus');
-    const dashboardView = document.getElementById('dashboardView');
-    
-    let finalQuery = targetCategory ? targetCategory : inputVal;
-    
-    if (!finalQuery) {
-        alert("Please enter a product name or click a category block!");
-        return;
-    }
-    
-    loadingStatus.style.display = 'block';
-    resultsWrapper.innerHTML = '';
-    dashboardView.style.display = 'none'; 
-    
-    // Calls your live Render application service
-    let url = 'https://mini-prices-backend.onrender.com/search?item=' + encodeURIComponent(finalQuery);
-    
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            loadingStatus.style.display = 'none';
-            
-            resultsWrapper.innerHTML = `
-                <button class="back-btn" onclick="window.location.reload()">← Go Back Home</button>
-                <div class="layout-section">
-                    <div class="section-heading">Results Found for "${finalQuery}"</div>
-                    <div id="cardsInsertionPoint"></div>
-                </div>
-            `;
-            
-            const insertionPoint = document.getElementById('cardsInsertionPoint');
-            
-            if (!data || data.length === 0 || data.error) {
-                insertionPoint.innerHTML = `<div style='text-align:center; padding:20px; color:#ef4444; font-weight:bold;'>No matches located. Try another keyword!</div>`;
-                return;
-            }
-            
-            data.forEach(product => {
-                insertionPoint.innerHTML += `
-                    <div class="product-item-box">
-                        <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
-                           <img src="${product.image}" style="width:60px; height:60px; object-fit:contain; background:#f4f4f5; border-radius:8px;">
-                           <strong style="font-size:16px;">${product.name}</strong>
-                        </div>
-                        
-                        <div class="comparison-row">
-                            <div>
-                                <span style="font-size:12px; color:#666;">Jumia Nigeria</span>
-                                <div style="font-weight:700; color:#e37613;">₦ ${product.jumiaPrice}</div>
-                            </div>
-                            <a class="view-deal-btn" style="background:#e37613;" href="https://www.jumia.com.ng/catalog/?q=${encodeURIComponent(product.searchWord)}" target="_blank">View on Jumia</a>
-                        </div>
-                        
-                        <div class="comparison-row">
-                            <div>
-                                <span style="font-size:12px; color:#666;">Jiji Market</span>
-                                <div style="font-weight:700; color:#3bb371;">${product.jijiPrice}</div>
-                            </div>
-                            <a class="view-deal-btn" style="background:#3bb371;" href="https://jiji.ng/search?query=${encodeURIComponent(product.searchWord)}" target="_blank">Compare on Jiji</a>
-                        </div>
-                    </div>
-                `;
-            });
-        })
-        .catch(error => {
-            loadingStatus.style.display = 'none';
-            resultsWrapper.innerHTML = `<div style='text-align:center; padding:20px; color:#ef4444;'>Connection error. Ensure your backend is running.</div>`;
-            console.error("Error:", error);
-        });
-}
-</script>
-</body>
-</html>
+                    
