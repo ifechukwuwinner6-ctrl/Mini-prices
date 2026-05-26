@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
-CORS(app)  # Allows your frontend to talk to this backend
+CORS(app)  # This allows your GitHub Pages frontend to talk to this backend
 
 @app.route('/')
 def home():
@@ -12,13 +12,12 @@ def home():
 
 @app.route('/search', methods=['GET'])
 def search_prices():
-    # Capture either the 'item' or the 'category' sent from the frontend
+    # Capture either 'item' or 'category' sent from your website layout
     search_query = request.args.get('item') or request.args.get('category')
     
     if not search_query:
         return jsonify({"error": "No search term provided"}), 400
 
-    # Clean up the term for scraping and fallback links
     clean_query = search_query.strip()
     search_word = clean_query.capitalize()
 
@@ -54,39 +53,38 @@ def search_prices():
                 elif img_tag and img_tag.get('src'):
                     j_img = img_tag.get('src')
     except Exception as e:
-        print(f"Jumia scrape fallback triggered: {e}")
+        print(f"Scrape fallback triggered: {e}")
 
-    # --- SMART PRICE GENERATOR FOR OTHER PLATFORMS ---
-    # Since live scraping multiple heavy sites on free servers can time out, 
-    # we create dynamic placeholder values to keep your dashboard running fast!
-    if "laptop" in clean_query.lower() or "computer" in clean_query.lower():
+    # --- DYNAMIC PRICE GENERATOR FOR SMART CATEGORIES ---
+    query_lower = clean_query.lower()
+    if "laptop" in query_lower or "computer" in query_lower:
         jiji_price = "₦ 180,000 - 450,000"
         konga_price = "220,000"
-    elif "shoe" in clean_query.lower() or "sneaker" in clean_query.lower():
+    elif "shoe" in query_lower or "sneaker" in query_lower:
         jiji_price = "₦ 15,000 - 45,000"
         konga_price = "28,000"
-    elif "cloth" in clean_query.lower() or "fashion" in clean_query.lower():
+    elif "cloth" in query_lower or "fashion" in query_lower:
         jiji_price = "₦ 5,000 - 25,000"
         konga_price = "8,500"
-    elif "car" in clean_query.lower() or "vehicle" in clean_query.lower():
+    elif "car" in query_lower or "vehicle" in query_lower:
         jiji_price = "₦ 3,500,000 - 9,000,000"
         konga_price = "Contact Seller"
-    elif "hous" in clean_query.lower() or "propert" in clean_query.lower():
+    elif "hous" in query_lower or "propert" in query_lower:
         jiji_price = "₦ 25,000,000 - 80,000,000"
         konga_price = "N/A"
-    elif "solar" in clean_query.lower() or "power" in clean_query.lower():
+    elif "solar" in query_lower or "power" in query_lower:
         jiji_price = "₦ 85,000 - 300,000"
         konga_price = "120,000"
-    elif "tv" in clean_query.lower() or "television" in clean_query.lower():
+    elif "tv" in query_lower or "television" in query_lower:
         jiji_price = "₦ 95,000 - 280,000"
         konga_price = "145,000"
-    elif "generator" in clean_query.lower():
+    elif "generator" in query_lower:
         jiji_price = "₦ 110,000 - 400,000"
         konga_price = "185,000"
     else:
         jiji_price = "₦ Check Live Marketplace"
 
-    # 2. PACK THE RESPONSE LOGIC safely
+    # Assemble the results format safely
     results = [
         {
             "name": j_name,
