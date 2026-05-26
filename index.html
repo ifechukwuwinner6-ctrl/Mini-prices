@@ -3,81 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini-Prices | Compare Smart</title>
+    <title>Mini-Prices | Your Ultimate Deal Finder</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
         }
         body {
-            background-color: #f4f6f9;
-            color: #333;
+            /* Vibrant premium green gradient background style */
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            min-height: 100vh;
             padding: 20px;
+            color: #000000;
+        }
+        .welcome-banner {
+            max-width: 650px;
+            margin: 20px auto;
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .welcome-banner h2 {
+            font-size: 30px;
+            display: block;
+            margin-bottom: 12px;
+            /* Striking purple text highlight styling */
+            color: #f7d6ff;
+            text-shadow: 2px 2px #4a0e4e;
+        }
+        .welcome-banner p {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #ffffff;
+            font-weight: normal;
+            margin-bottom: 15px;
         }
         .container {
             max-width: 600px;
-            margin: 0 auto;
-            background: #fff;
+            margin: 0 auto 40px auto;
+            background: #ffffff;
             padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
-        h1 {
+        h1.brand-title {
             text-align: center;
-            color: #2c3e50;
-            margin-bottom: 8px;
+            color: #511c74; /* Rich purple branding */
             font-size: 24px;
+            margin-bottom: 5px;
         }
         p.subtitle {
             text-align: center;
-            color: #7f8c8d;
-            font-size: 14px;
-            margin-bottom: 25px;
+            color: #555555;
+            font-size: 13px;
+            margin-bottom: 20px;
+            font-weight: normal;
         }
         .search-box {
             display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
+            gap: 8px;
+            margin-bottom: 20px;
         }
         input {
             flex: 1;
-            padding: 12px;
-            border: 1px solid #ccd1d9;
-            border-radius: 8px;
+            padding: 14px;
+            border: 2px solid #511c74;
+            border-radius: 12px;
             font-size: 16px;
+            font-weight: bold;
+            color: #000000;
             outline: none;
         }
-        input:focus {
-            border-color: #3498db;
-        }
         button {
-            padding: 12px 20px;
-            background-color: #3498db;
+            padding: 0 24px;
+            background-color: #0288d1;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
-            cursor: pointer;
             font-weight: bold;
+            cursor: pointer;
         }
         button:hover {
-            background-color: #2980b9;
+            background-color: #01579b;
         }
         .loading {
             text-align: center;
             display: none;
-            color: #7f8c8d;
+            color: #511c74;
             font-weight: bold;
-            margin: 20px 0;
+            margin: 25px 0;
+            font-size: 18px;
         }
         .product-card {
-            border: 1px solid #e6e9ed;
-            border-radius: 10px;
+            border: 2px solid #f0edf5;
+            border-radius: 16px;
             padding: 15px;
-            background: #fff;
-            margin-top: 15px;
+            background: #ffffff;
+            margin-top: 18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.02);
         }
         .product-header {
             display: flex;
@@ -86,62 +112,71 @@
             margin-bottom: 15px;
         }
         .product-image {
-            width: 80px;
-            height: 80px;
+            width: 65px;
+            height: 65px;
             object-fit: contain;
-            border-radius: 6px;
-            background: #f5f7fa;
+            border-radius: 10px;
         }
         .product-title {
-            font-size: 16px;
-            color: #2c3e50;
-            font-weight: 600;
+            font-size: 18px;
+            color: #511c74; /* Titles highlighted in bold purple */
+            font-weight: bold;
         }
-        .deal-row {
+        .store-row {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            border-top: 1px dashed #e6e9ed;
+            border-left: 5px solid #333;
         }
-        .store-name {
+        /* Color tags separating Jumia vs Jiji items */
+        .jumia-border { border-left-color: #f68b1e; }
+        .jiji-border { border-left-color: #3bb371; }
+        
+        .label-text {
+            font-size: 14px;
             font-weight: bold;
-            font-size: 15px;
+            color: #000000; /* Deep black text */
         }
-        .store-jumia { color: #f68b1e; }
-        .store-jiji { color: #3bb371; }
-        .price {
+        .price-text {
             font-size: 16px;
-            font-weight: bold;
-            color: #333;
+            font-weight: 900;
+            color: #000000; /* Deep black price font */
+            margin-top: 3px;
         }
-        .deal-link {
-            padding: 6px 12px;
-            background: #e1f5fe;
-            color: #0288d1;
+        .store-btn {
+            padding: 8px 14px;
+            border-radius: 8px;
             text-decoration: none;
-            border-radius: 6px;
             font-size: 13px;
             font-weight: bold;
-        }
-        .deal-link:hover {
-            background: #0288d1;
             color: white;
+            text-align: center;
         }
+        .btn-jumia { background-color: #f68b1e; }
+        .btn-jiji { background-color: #3bb371; }
     </style>
 </head>
 <body>
 
+<div class="welcome-banner">
+    <h2>Welcome to Mini-prices - Your Smart Deal Finder!</h2>
+    <p>Hello! We help you find the absolute cheapest products. Our smart engine searches Jumia and Jiji simultaneously to give you multiple real-time comparison options. Search below to compare many results as many as you need!</p>
+</div>
+
 <div class="container">
-    <h1>Mini-prices</h1>
+    <h1 class="brand-title">Mini-prices</h1>
     <p class="subtitle">Check items you need and find where to get them cheap</p>
     
     <div class="search-box">
-        <input type="text" id="itemInput" placeholder="Type a product (e.g., phone, shoe)...">
+        <input type="text" id="itemInput" placeholder="What are you looking for today?...">
         <button onclick="searchProduct()">Search</button>
     </div>
 
-    <div id="loadingStatus" class="loading">Searching deals... Please wait...</div>
+    <div id="loadingStatus" class="loading">Hunting down the best options... 🚀</div>
     <div id="resultsWrapper"></div>
 </div>
 
@@ -152,47 +187,47 @@ function searchProduct() {
     const loadingStatus = document.getElementById('loadingStatus');
     
     if (!userInput) {
-        alert("Please type something to search!");
+        alert("Please enter a term to search!");
         return;
     }
     
-    // Show loading text and clear past results
     loadingStatus.style.display = 'block';
     resultsWrapper.innerHTML = '';
     
-    // Connected directly to your live Render server!
+    // Smoothly connected to your live engine endpoint
     fetch('https://mini-prices-backend.onrender.com/search?item=' + encodeURIComponent(userInput))
         .then(response => response.json())
         .then(data => {
             loadingStatus.style.display = 'none';
             
-            if (!data || data.length === 0 || data[0].name.includes("Not Found")) {
-                resultsWrapper.innerHTML = `<div class='product-card' style='text-align:center; color:#e74c3c;'>No active matches found. Try checking another term!</div>`;
+            if (!data || data.length === 0) {
+                resultsWrapper.innerHTML = `<div style='text-align:center; padding:15px; color:red; font-weight:bold;'>No active items found. Try another query!</div>`;
                 return;
             }
             
+            // Loop and draw every independent option down the list
             data.forEach(product => {
                 resultsWrapper.innerHTML += `
                     <div class="product-card">
                         <div class="product-header">
-                            <img class="product-image" src="${product.image}" alt="Product Image">
-                            <h3 class="product-title">${product.name}</h3>
+                            <img class="product-image" src="${product.image}" alt="Product">
+                            <div class="product-title">${product.name}</div>
                         </div>
                         
-                        <div class="deal-row">
+                        <div class="store-row jumia-border">
                             <div>
-                                <span class="store-name store-jumia">Jumia NGR</span>
-                                <div class="price">₦ ${product.jumiaPrice}</div>
+                                <div class="label-text">Jumia NGR</div>
+                                <div class="price-text">₦ ${product.jumiaPrice}</div>
                             </div>
-                            <a class="deal-link" href="${product.jumiaLink}" target="_blank">View on Jumia</a>
+                            <a class="store-btn btn-jumia" href="${product.jumiaLink}" target="_blank">View on Jumia</a>
                         </div>
                         
-                        <div class="deal-row">
+                        <div class="store-row jiji-border">
                             <div>
-                                <span class="store-name store-jiji">Jiji NGR</span>
-                                <div class="price">${product.jijiPrice}</div>
+                                <div class="label-text">Jiji NGR</div>
+                                <div class="price-text">${product.jijiPrice}</div>
                             </div>
-                            <a class="deal-link" href="${product.jijiLink}" target="_blank">Compare on Jiji</a>
+                            <a class="store-btn btn-jiji" href="${product.jijiLink}" target="_blank">Compare on Jiji</a>
                         </div>
                     </div>
                 `;
@@ -200,7 +235,7 @@ function searchProduct() {
         })
         .catch(error => {
             loadingStatus.style.display = 'none';
-            resultsWrapper.innerHTML = `<div class='product-card' style='text-align:center; color:#e74c3c;'>Error linking to backend engine. Please check back shortly!</div>`;
+            resultsWrapper.innerHTML = `<div style='text-align:center; padding:15px; color:red;'>Server communication error. Please check back shortly!</div>`;
             console.error("Error:", error);
         });
 }
