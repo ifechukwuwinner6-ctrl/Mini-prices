@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini-Prices | Ultimate Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mini-Prices | Ultimate Full-Screen Hub</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,112 +12,124 @@
             font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #0ba360, #3cba92); /* Vibrant Jiji-style green gradient background */
+            background: linear-gradient(135deg, #0ba360, #3cba92);
             min-height: 100vh;
             color: #000000;
-            padding-bottom: 50px;
+            padding-bottom: 60px;
+            width: 100%;
+            overflow-x: auto; /* Allows you to shift and swipe left/right if zoomed */
         }
-        /* Top Navigation Header & Search Panel */
+        
+        /* Sticky Header - Spans across the entire top width */
         .sticky-header {
             background-color: #0ba360;
             padding: 15px;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            width: 100%;
         }
         .header-brand {
             text-align: center;
             color: #ffffff;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
             margin-bottom: 12px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
         .search-box {
             display: flex;
-            max-width: 550px;
-            margin: 0 auto;
-            gap: 8px;
+            width: 100%;
+            max-width: 100%; /* Occupies full space */
+            gap: 10px;
         }
         input {
             flex: 1;
-            padding: 12px 16px;
+            padding: 14px 18px;
             border: 2px solid #ffffff;
             border-radius: 25px;
-            font-size: 15px;
+            font-size: 16px;
             outline: none;
             color: #000000;
             font-weight: bold;
+            width: 100%;
         }
         .search-btn {
-            background-color: #511c74; /* Catchy Deep Purple accent button */
+            background-color: #511c74;
             color: white;
             border: none;
-            padding: 0 22px;
+            padding: 0 25px;
             border-radius: 25px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
+
         /* Welcome Banner Section */
         .welcome-section {
-            max-width: 550px;
-            margin: 20px auto 10px auto;
-            padding: 0 15px;
+            width: 100%;
+            padding: 20px 15px 10px 15px;
             text-align: center;
             color: #ffffff;
         }
         .welcome-section h2 {
-            font-size: 22px;
-            color: #f7d6ff; /* Purple typography highlights */
+            font-size: 24px;
+            color: #f7d6ff;
             text-shadow: 1px 2px #4a0e4e;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .welcome-section p {
-            font-size: 14px;
+            font-size: 15px;
             opacity: 0.95;
-            line-height: 1.4;
+            line-height: 1.5;
         }
-        /* Main Viewport Container Box */
+
+        /* Full Screen Container Box - No more restricted max-width sidebars */
         .main-content {
-            max-width: 550px;
+            width: 94%;
             margin: 15px auto;
             background: #ffffff;
             border-radius: 24px;
-            padding: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            padding: 22px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
         .section-title {
-            font-size: 16px;
+            font-size: 18px;
             color: #511c74;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             font-weight: bold;
+            border-bottom: 2px solid #f0edf5;
+            padding-bottom: 5px;
         }
-        /* Dynamic Category Grid System (Matching Jiji Dashboard) */
+
+        /* Category Grid Layout - Expands nicely to fill screen rows */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
             margin-bottom: 10px;
+            width: 100%;
         }
         .category-card {
             background: #f8f9fa;
             border: 1px solid #eef0f2;
-            border-radius: 16px;
-            padding: 15px;
+            border-radius: 18px;
+            padding: 20px 10px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
         }
         .category-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            background: #f3fdf7;
+            background: #eefdf4;
+            border-color: #3cba92;
         }
         .category-icon {
-            font-size: 36px;
-            margin-bottom: 8px;
+            font-size: 40px;
+            margin-bottom: 10px;
             display: inline-block;
         }
         .category-name {
@@ -125,52 +137,56 @@
             font-weight: bold;
             color: #000000;
         }
-        /* Results Cards Layout Styling */
+
+        /* Results Display Layout Cards */
         .loading {
             text-align: center;
             display: none;
             color: #0ba360;
             font-weight: bold;
-            margin: 20px 0;
-            font-size: 16px;
+            margin: 25px 0;
+            font-size: 18px;
         }
         .product-card {
             border: 2px solid #f0edf5;
-            border-radius: 16px;
-            padding: 15px;
+            border-radius: 20px;
+            padding: 18px;
             background: #ffffff;
-            margin-top: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            width: 100%;
         }
         .product-header {
             display: flex;
-            gap: 12px;
+            gap: 15px;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             border-bottom: 1px solid #f1f1f1;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
         }
         .product-image {
-            width: 55px;
-            height: 55px;
+            width: 65px;
+            height: 65px;
             object-fit: contain;
-            border-radius: 8px;
+            border-radius: 10px;
         }
         .product-title {
-            font-size: 16px;
+            font-size: 18px;
             color: #511c74;
             font-weight: bold;
         }
-        /* Specialized Retail Row Sub-Layouts */
+
+        /* Store Comparison Rows */
         .retail-row {
             background: #fafafa;
-            border-radius: 10px;
-            padding: 10px 12px;
-            margin-top: 8px;
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-top: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-left: 4px solid #333;
+            border-left: 5px solid #333;
+            width: 100%;
         }
         .row-jumia { border-left-color: #f68b1e; }
         .row-jiji { border-left-color: #3bb371; }
@@ -179,23 +195,24 @@
         .row-amazon { border-left-color: #ff9900; }
         
         .platform-label {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
             color: #000000;
         }
         .price-label {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 900;
             color: #000000;
-            margin-top: 2px;
+            margin-top: 3px;
         }
         .action-link {
-            padding: 6px 12px;
-            border-radius: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: bold;
             color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .btn-jumia { background-color: #f68b1e; }
         .btn-jiji { background-color: #3bb371; }
@@ -216,7 +233,7 @@
 
 <div class="welcome-section">
     <h2>Smart Shopping Made Simple!</h2>
-    <p>Hello! We help you compare prices between Jumia, Jiji, Konga, AliExpress, and Amazon simultaneously. Pick a quick category below or use the top search bar!</p>
+    <p>Compare prices between Jumia, Jiji, Konga, AliExpress, and Amazon simultaneously. Pick a quick category below or use the top search bar!</p>
 </div>
 
 <div class="main-content">
@@ -254,7 +271,6 @@ function searchProduct(targetCategory) {
     const loadingStatus = document.getElementById('loadingStatus');
     const dashboardView = document.getElementById('dashboardView');
     
-    // Determine query type (top bar search vs quick card click)
     let finalQuery = targetCategory ? targetCategory : inputVal;
     
     if (!finalQuery) {
@@ -264,7 +280,7 @@ function searchProduct(targetCategory) {
     
     loadingStatus.style.display = 'block';
     resultsWrapper.innerHTML = '';
-    dashboardView.style.display = 'none'; // Clear dashboard to bring results to main view focus
+    dashboardView.style.display = 'none'; 
     
     let url = 'https://mini-prices-backend.onrender.com/search?';
     if (targetCategory) {
@@ -278,18 +294,16 @@ function searchProduct(targetCategory) {
         .then(data => {
             loadingStatus.style.display = 'none';
             
-            // Add custom back button to return to dashboard cleanly
             resultsWrapper.innerHTML = `
-                <button onclick="window.location.reload()" style="background:#511c74; color:white; border:none; padding:8px 15px; border-radius:8px; margin-bottom:15px; font-weight:bold; cursor:pointer;">← Show Categories</button>
+                <button onclick="window.location.reload()" style="background:#511c74; color:white; border:none; padding:10px 18px; border-radius:8px; margin-bottom:18px; font-weight:bold; cursor:pointer; font-size:14px;">← Show Categories</button>
                 <div class="section-title">Comparison Results for "${finalQuery}"</div>
             `;
             
             if (!data || data.length === 0) {
-                resultsWrapper.innerHTML += `<div style='text-align:center; padding:15px; color:red;'>No active matches found.</div>`;
+                resultsWrapper.innerHTML += `<div style='text-align:center; padding:15px; color:red; font-weight:bold;'>No active matches found.</div>`;
                 return;
             }
             
-            // Map loop to print separated engine cards for multiple matching variants
             data.forEach(product => {
                 const cleanTerm = encodeURIComponent(product.searchWord);
                 resultsWrapper.innerHTML += `
@@ -344,7 +358,7 @@ function searchProduct(targetCategory) {
         })
         .catch(error => {
             loadingStatus.style.display = 'none';
-            resultsWrapper.innerHTML = `<div style='text-align:center; padding:15px; color:red;'>Connection issue.</div>`;
+            resultsWrapper.innerHTML = `<div style='text-align:center; padding:15px; color:red;'>Connection error.</div>`;
             console.error("Error:", error);
         });
 }
