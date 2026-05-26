@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini-Prices | Your Ultimate Deal Finder</title>
+    <title>Mini-Prices | Ultimate Hub</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,222 +12,331 @@
             font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
         }
         body {
-            /* Vibrant premium green gradient background style */
-            background: linear-gradient(135deg, #11998e, #38ef7d);
+            background: linear-gradient(135deg, #0ba360, #3cba92); /* Vibrant Jiji-style green gradient background */
             min-height: 100vh;
-            padding: 20px;
             color: #000000;
+            padding-bottom: 50px;
         }
-        .welcome-banner {
-            max-width: 650px;
-            margin: 20px auto;
+        /* Top Navigation Header & Search Panel */
+        .sticky-header {
+            background-color: #0ba360;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .header-brand {
             text-align: center;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        .welcome-banner h2 {
-            font-size: 30px;
-            display: block;
-            margin-bottom: 12px;
-            /* Striking purple text highlight styling */
-            color: #f7d6ff;
-            text-shadow: 2px 2px #4a0e4e;
-        }
-        .welcome-banner p {
-            font-size: 15px;
-            line-height: 1.5;
             color: #ffffff;
-            font-weight: normal;
-            margin-bottom: 15px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto 40px auto;
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-        h1.brand-title {
-            text-align: center;
-            color: #511c74; /* Rich purple branding */
             font-size: 24px;
-            margin-bottom: 5px;
-        }
-        p.subtitle {
-            text-align: center;
-            color: #555555;
-            font-size: 13px;
-            margin-bottom: 20px;
-            font-weight: normal;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
         .search-box {
             display: flex;
+            max-width: 550px;
+            margin: 0 auto;
             gap: 8px;
-            margin-bottom: 20px;
         }
         input {
             flex: 1;
-            padding: 14px;
-            border: 2px solid #511c74;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #000000;
+            padding: 12px 16px;
+            border: 2px solid #ffffff;
+            border-radius: 25px;
+            font-size: 15px;
             outline: none;
+            color: #000000;
+            font-weight: bold;
         }
-        button {
-            padding: 0 24px;
-            background-color: #0288d1;
+        .search-btn {
+            background-color: #511c74; /* Catchy Deep Purple accent button */
             color: white;
             border: none;
-            border-radius: 12px;
-            font-size: 16px;
+            padding: 0 22px;
+            border-radius: 25px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
         }
-        button:hover {
-            background-color: #01579b;
+        /* Welcome Banner Section */
+        .welcome-section {
+            max-width: 550px;
+            margin: 20px auto 10px auto;
+            padding: 0 15px;
+            text-align: center;
+            color: #ffffff;
         }
+        .welcome-section h2 {
+            font-size: 22px;
+            color: #f7d6ff; /* Purple typography highlights */
+            text-shadow: 1px 2px #4a0e4e;
+            margin-bottom: 6px;
+        }
+        .welcome-section p {
+            font-size: 14px;
+            opacity: 0.95;
+            line-height: 1.4;
+        }
+        /* Main Viewport Container Box */
+        .main-content {
+            max-width: 550px;
+            margin: 15px auto;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .section-title {
+            font-size: 16px;
+            color: #511c74;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        /* Dynamic Category Grid System (Matching Jiji Dashboard) */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .category-card {
+            background: #f8f9fa;
+            border: 1px solid #eef0f2;
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background: #f3fdf7;
+        }
+        .category-icon {
+            font-size: 36px;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+        .category-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+        }
+        /* Results Cards Layout Styling */
         .loading {
             text-align: center;
             display: none;
-            color: #511c74;
+            color: #0ba360;
             font-weight: bold;
-            margin: 25px 0;
-            font-size: 18px;
+            margin: 20px 0;
+            font-size: 16px;
         }
         .product-card {
             border: 2px solid #f0edf5;
             border-radius: 16px;
             padding: 15px;
             background: #ffffff;
-            margin-top: 18px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
         .product-header {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 10px;
         }
         .product-image {
-            width: 65px;
-            height: 65px;
+            width: 55px;
+            height: 55px;
             object-fit: contain;
-            border-radius: 10px;
+            border-radius: 8px;
         }
         .product-title {
-            font-size: 18px;
-            color: #511c74; /* Titles highlighted in bold purple */
+            font-size: 16px;
+            color: #511c74;
             font-weight: bold;
         }
-        .store-row {
+        /* Specialized Retail Row Sub-Layouts */
+        .retail-row {
             background: #fafafa;
-            border-radius: 12px;
-            padding: 12px;
+            border-radius: 10px;
+            padding: 10px 12px;
             margin-top: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-left: 5px solid #333;
+            border-left: 4px solid #333;
         }
-        /* Color tags separating Jumia vs Jiji items */
-        .jumia-border { border-left-color: #f68b1e; }
-        .jiji-border { border-left-color: #3bb371; }
+        .row-jumia { border-left-color: #f68b1e; }
+        .row-jiji { border-left-color: #3bb371; }
+        .row-konga { border-left-color: #ba0d0d; }
+        .row-aliexpress { border-left-color: #ff4747; }
+        .row-amazon { border-left-color: #ff9900; }
         
-        .label-text {
-            font-size: 14px;
-            font-weight: bold;
-            color: #000000; /* Deep black text */
-        }
-        .price-text {
-            font-size: 16px;
-            font-weight: 900;
-            color: #000000; /* Deep black price font */
-            margin-top: 3px;
-        }
-        .store-btn {
-            padding: 8px 14px;
-            border-radius: 8px;
-            text-decoration: none;
+        .platform-label {
             font-size: 13px;
             font-weight: bold;
+            color: #000000;
+        }
+        .price-label {
+            font-size: 15px;
+            font-weight: 900;
+            color: #000000;
+            margin-top: 2px;
+        }
+        .action-link {
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
             color: white;
-            text-align: center;
         }
         .btn-jumia { background-color: #f68b1e; }
         .btn-jiji { background-color: #3bb371; }
+        .btn-konga { background-color: #ba0d0d; }
+        .btn-aliexpress { background-color: #ff4747; }
+        .btn-amazon { background-color: #ff9900; }
     </style>
 </head>
 <body>
 
-<div class="welcome-banner">
-    <h2>Welcome to Mini-prices - Your Smart Deal Finder!</h2>
-    <p>Hello! We help you find the absolute cheapest products. Our smart engine searches Jumia and Jiji simultaneously to give you multiple real-time comparison options. Search below to compare many results as many as you need!</p>
-</div>
-
-<div class="container">
-    <h1 class="brand-title">Mini-prices</h1>
-    <p class="subtitle">Check items you need and find where to get them cheap</p>
-    
+<div class="sticky-header">
+    <div class="header-brand">Mini-prices</div>
     <div class="search-box">
         <input type="text" id="itemInput" placeholder="What are you looking for today?...">
-        <button onclick="searchProduct()">Search</button>
+        <button class="search-btn" onclick="searchProduct('')">Search</button>
+    </div>
+</div>
+
+<div class="welcome-section">
+    <h2>Smart Shopping Made Simple!</h2>
+    <p>Hello! We help you compare prices between Jumia, Jiji, Konga, AliExpress, and Amazon simultaneously. Pick a quick category below or use the top search bar!</p>
+</div>
+
+<div class="main-content">
+    <div id="dashboardView">
+        <div class="section-title">Browse Categories</div>
+        
+        <div class="grid-container">
+            <div class="category-card" onclick="searchProduct('Phones & Tablets')">
+                <span class="category-icon">📱</span>
+                <div class="category-name">Phones & Tablets</div>
+            </div>
+            <div class="category-card" onclick="searchProduct('Smartwatches & Accs')">
+                <span class="category-icon">⌚</span>
+                <div class="category-name">Watches & Accs</div>
+            </div>
+            <div class="category-card" onclick="searchProduct('Sneakers & Shoes')">
+                <span class="category-icon">👟</span>
+                <div class="category-name">Sneakers & Shoes</div>
+            </div>
+            <div class="category-card" onclick="searchProduct('Fashion Clothing')">
+                <span class="category-icon">👕</span>
+                <div class="category-name">Fashion Clothes</div>
+            </div>
+        </div>
     </div>
 
-    <div id="loadingStatus" class="loading">Hunting down the best options... 🚀</div>
+    <div id="loadingStatus" class="loading">Searching across 5 platforms... 🚀</div>
     <div id="resultsWrapper"></div>
 </div>
 
 <script>
-function searchProduct() {
-    const userInput = document.getElementById('itemInput').value.trim();
+function searchProduct(targetCategory) {
+    const inputVal = document.getElementById('itemInput').value.trim();
     const resultsWrapper = document.getElementById('resultsWrapper');
     const loadingStatus = document.getElementById('loadingStatus');
+    const dashboardView = document.getElementById('dashboardView');
     
-    if (!userInput) {
-        alert("Please enter a term to search!");
+    // Determine query type (top bar search vs quick card click)
+    let finalQuery = targetCategory ? targetCategory : inputVal;
+    
+    if (!finalQuery) {
+        alert("Please write something or click a category card!");
         return;
     }
     
     loadingStatus.style.display = 'block';
     resultsWrapper.innerHTML = '';
+    dashboardView.style.display = 'none'; // Clear dashboard to bring results to main view focus
     
-    // Smoothly connected to your live engine endpoint
-    fetch('https://mini-prices-backend.onrender.com/search?item=' + encodeURIComponent(userInput))
+    let url = 'https://mini-prices-backend.onrender.com/search?';
+    if (targetCategory) {
+        url += 'category=' + encodeURIComponent(targetCategory);
+    } else {
+        url += 'item=' + encodeURIComponent(inputVal);
+    }
+    
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             loadingStatus.style.display = 'none';
             
+            // Add custom back button to return to dashboard cleanly
+            resultsWrapper.innerHTML = `
+                <button onclick="window.location.reload()" style="background:#511c74; color:white; border:none; padding:8px 15px; border-radius:8px; margin-bottom:15px; font-weight:bold; cursor:pointer;">← Show Categories</button>
+                <div class="section-title">Comparison Results for "${finalQuery}"</div>
+            `;
+            
             if (!data || data.length === 0) {
-                resultsWrapper.innerHTML = `<div style='text-align:center; padding:15px; color:red; font-weight:bold;'>No active items found. Try another query!</div>`;
+                resultsWrapper.innerHTML += `<div style='text-align:center; padding:15px; color:red;'>No active matches found.</div>`;
                 return;
             }
             
-            // Loop and draw every independent option down the list
+            // Map loop to print separated engine cards for multiple matching variants
             data.forEach(product => {
+                const cleanTerm = encodeURIComponent(product.searchWord);
                 resultsWrapper.innerHTML += `
                     <div class="product-card">
                         <div class="product-header">
-                            <img class="product-image" src="${product.image}" alt="Product">
+                            <img class="product-image" src="${product.image}" alt="Item">
                             <div class="product-title">${product.name}</div>
                         </div>
                         
-                        <div class="store-row jumia-border">
+                        <div class="retail-row row-jumia">
                             <div>
-                                <div class="label-text">Jumia NGR</div>
-                                <div class="price-text">₦ ${product.jumiaPrice}</div>
+                                <div class="platform-label">Jumia Nigeria</div>
+                                <div class="price-label">₦ ${product.jumiaPrice}</div>
                             </div>
-                            <a class="store-btn btn-jumia" href="${product.jumiaLink}" target="_blank">View on Jumia</a>
+                            <a class="action-link btn-jumia" href="https://www.jumia.com.ng/catalog/?q=${cleanTerm}" target="_blank">View</a>
                         </div>
                         
-                        <div class="store-row jiji-border">
+                        <div class="retail-row row-jiji">
                             <div>
-                                <div class="label-text">Jiji NGR</div>
-                                <div class="price-text">${product.jijiPrice}</div>
+                                <div class="platform-label">Jiji Nigeria</div>
+                                <div class="price-label">${product.jijiPrice}</div>
                             </div>
-                            <a class="store-btn btn-jiji" href="${product.jijiLink}" target="_blank">Compare on Jiji</a>
+                            <a class="action-link btn-jiji" href="https://jiji.ng/search?query=${cleanTerm}" target="_blank">Compare</a>
+                        </div>
+
+                        <div class="retail-row row-konga">
+                            <div>
+                                <div class="platform-label">Konga Mall</div>
+                                <div class="price-label">₦ ${product.kongaPrice}</div>
+                            </div>
+                            <a class="action-link btn-konga" href="https://www.konga.com/search?search=${cleanTerm}" target="_blank">Check</a>
+                        </div>
+
+                        <div class="retail-row row-aliexpress">
+                            <div>
+                                <div class="platform-label">AliExpress Global</div>
+                                <div class="price-label">${product.aliexpressPrice}</div>
+                            </div>
+                            <a class="action-link btn-aliexpress" href="https://www.aliexpress.com/wholesale?SearchText=${cleanTerm}" target="_blank">Buy</a>
+                        </div>
+
+                        <div class="retail-row row-amazon">
+                            <div>
+                                <div class="platform-label">Amazon Hub</div>
+                                <div class="price-label">${product.amazonPrice}</div>
+                            </div>
+                            <a class="action-link btn-amazon" href="https://www.amazon.com/s?k=${cleanTerm}" target="_blank">Order</a>
                         </div>
                     </div>
                 `;
@@ -235,7 +344,7 @@ function searchProduct() {
         })
         .catch(error => {
             loadingStatus.style.display = 'none';
-            resultsWrapper.innerHTML = `<div style='text-align:center; padding:15px; color:red;'>Server communication error. Please check back shortly!</div>`;
+            resultsWrapper.innerHTML = `<div style='text-align:center; padding:15px; color:red;'>Connection issue.</div>`;
             console.error("Error:", error);
         });
 }
