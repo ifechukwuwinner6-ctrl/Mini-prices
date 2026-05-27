@@ -3,261 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini-Prices | Full-Screen Smart Hub</title>
+    <title>Mini-prices - Smart Deal Finder</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-        
-        body {
-            background-color: #f4f4f5;
-            color: #1c1c1e;
-            padding-bottom: 50px;
-            width: 100%;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Jiji Style Full Width Green Header Area */
-        .main-header {
-            background-color: #3bb371;
-            padding: 16px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-            width: 100%;
+        body {
+            background-color: #f4f6f8;
+            color: #333;
+            padding-bottom: 40px;
+        }
+
+        /* Header Style */
+        header {
+            background-color: #2ecc71;
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto 12px auto;
-            padding: 0 8px;
+            margin-bottom: 15px;
         }
 
-        .brand-logo {
-            color: #ffffff;
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
+        header h1 {
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        .brand-subtitle {
-            color: #e2fbe9;
-            font-size: 13px;
-            font-weight: 500;
+        header p {
+            font-size: 12px;
+            opacity: 0.9;
         }
 
-        /* Search Form Input Bar Container */
+        /* Search Bar */
         .search-container {
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
-            gap: 8px;
-            padding: 0 8px;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        .search-input {
+        .search-container input {
             flex: 1;
-            padding: 14px 18px;
+            padding: 12px 15px;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             font-size: 16px;
             outline: none;
-            color: #000000;
-            width: 100%;
         }
 
-        .search-button {
-            background-color: #3a165a;
+        .search-container button {
+            background-color: #34495e;
             color: white;
             border: none;
-            padding: 0 24px;
-            border-radius: 12px;
-            font-size: 15px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
         }
 
-        /* Web Page Main Box Wrapper */
-        .page-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 16px;
-            width: 100%;
-        }
-
-        .promo-banner {
-            background: linear-gradient(135deg, #2e8b57, #3bb371);
-            border-radius: 16px;
-            padding: 20px;
+        /* Banner Info */
+        .banner {
+            background-color: #27ae60;
             color: white;
-            margin-bottom: 24px;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.4;
         }
 
-        .promo-banner h2 {
-            font-size: 20px;
-            margin-bottom: 6px;
+        /* Main Container Layout */
+        .container {
+            padding: 0 15px;
         }
 
-        .layout-section {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .section-heading {
+        .section-title {
             font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 16px;
+            margin: 15px 0 10px 0;
+            font-weight: bold;
+            color: #2c3e50;
         }
 
-        /* Grid Framework Columns System */
-        .jiji-grid {
+        /* Grid System like Jiji/Jumia */
+        .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
-            gap: 14px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
         }
 
-        @media (max-width: 480px) {
-            .jiji-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-        }
-
-        /* Clickable Grid Layout Cards */
-        .market-card {
-            background: #ffffff;
-            border: 1px solid #e5e5ea;
-            border-radius: 14px;
+        .category-card {
+            background-color: white;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            transition: transform 0.2s;
         }
 
-        .image-box {
+        .category-card:active {
+            transform: scale(0.97);
+        }
+
+        .category-card img {
             width: 100%;
             height: 120px;
-            background-color: #f8f9fa;
-        }
-
-        .image-box img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
         }
 
-        .card-info {
+        .category-info {
             padding: 10px;
             text-align: center;
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .card-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #3a3a3c;
+        .category-info h3 {
+            font-size: 14px;
+            color: #333;
         }
 
-        .loader {
-            text-align: center;
+        /* Results Display Section */
+        .results-section {
+            margin-top: 20px;
             display: none;
-            color: #3bb371;
-            font-weight: 700;
-            padding: 40px 0;
-            font-size: 18px;
         }
 
-        .back-btn {
-            background-color: #e5e5ea;
-            color: #1c1c1e;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-bottom: 16px;
+        .loading-spinner {
+            text-align: center;
+            padding: 20px;
+            font-weight: bold;
+            color: #2ecc71;
         }
 
-        .product-item-box {
-            border: 1px solid #e5e5ea;
-            border-radius: 16px;
-            padding: 16px;
-            background: #ffffff;
-            margin-top: 16px;
-        }
-
-        .comparison-row {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 12px;
-            margin-top: 10px;
+        .product-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .view-deal-btn {
-            padding: 8px 16px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 700;
+        .product-details h4 {
+            font-size: 15px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .product-details p {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e74c3c;
+            text-align: right;
+        }
+
+        .visit-btn {
+            display: inline-block;
+            background-color: #2ecc71;
             color: white;
-            background-color: #3bb371;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 12px;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
 
-<header class="main-header">
-    <div class="header-top">
-        <div class="brand-logo">Mini-prices</div>
-        <div class="brand-subtitle">Smart Deal Finder</div>
-    </div>
-    <div class="search-container">
-        <input type="text" id="itemInput" class="search-input" placeholder="What are you looking for today?">
-        <button class="search-button" onclick="searchProduct('')">Search</button>
-    </div>
-</header>
+    <header>
+        <div class="header-top">
+            <h1>Mini-prices</h1>
+            <p>Smart Deal Finder</p>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for items, brands...">
+            <button onclick="triggerSearch()">Search</button>
+        </div>
+    </header>
 
-<div class="page-wrapper">
-    
-    <div id="dashboardView">
-        <div class="promo-banner">
-            <h2>Compare Prices Live!</h2>
-            <p>Click any category layout below to view items and see immediate cost comparisons.</p>
+    <div class="banner">
+        <strong>Compare Prices Live!</strong><br>
+        Click any category layout below to view items and see immediate cost comparisons from wholesalers.
+    </div>
+
+    <div class="container">
+        
+        <div id="resultsSection" class="results-section">
+            <h2 class="section-title" id="resultsTitle">Search Results</h2>
+            <div id="loading" class="loading-spinner" style="display: none;">Searching whole-selling web platforms...</div>
+            <div id="resultsContainer"></div>
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ccc;">
         </div>
 
-        <div class="layout-section">
-            <div class="section-heading">Trending Categories</div>
+        <h2 class="section-title">Trending Categories</h2>
+        <div class="category-grid">
             
-            <div class="jiji-grid">
-                <div class="market-card" onclick="searchProduct('Laptops')">
-                    <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400" alt="Laptops">
-                    </div>
-                    <div class="card-info"><div class="card-title">Laptops & Computers</div></div>
+            <div class="category-card" onclick="searchCategory('Laptops')">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&auto=format&fit=crop" alt="Laptops">
+                <div class="category-info">
+                    <h3>Laptops & Computers</h3>
                 </div>
+            </div>
 
-                <div class="market-card" onclick="searchProduct('Shoes')">
-                    <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" alt="Shoes">
-                    </div>
-                    <div class="card-info"><div class="card-title">Sneakers & Shoes</div></div>
+            <div class="category-card" onclick="searchCategory('Sneakers')">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop" alt="Shoes">
+                <div class="category-info">
+                    <h3>Sneakers & Shoes</h3>
                 </div>
+            </div>
 
-                <div class="market-card" onclick="searchProduct('Clothes')">
+            <div class="category-card" onclick="searchCategory('Solar panels and batteries')">
+                <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&auto=format&fit=crop" alt="Solar">
+                <div class="category-info">
+                    <h3>Solar Panels & Batteries</h3>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="searchCategory('Eye glasses')">
+                <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=500&auto=format&fit=crop" alt="Glasses">
+                <div class="category-info">
+                    <h3>Eye Glasses & Frames</h3>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="searchCategory('Phones')">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop" alt="Phones">
+                <div class="category-info">
+                    <h3>Smartphones & Tablets</h3>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="searchCategory('Clothes')">
+                <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=500&auto=format&fit=crop" alt="Clothes">
+                <div class="category-info">
+                    <h3>Fashion & Clothes</h3>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="searchCategory('Gas cylinders')">
+                <img src="https://images.unsplash.com/photo-1624953901718-e24ee7200b85?w=500&auto=format&fit=crop" alt="Gas">
+                <div class="category-info">
+                    <h3>Gas Cylinders & Stoves</h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Your Live Render Backend Engine URL
+        const BACKEND_URL = "https://mini-prices-backend.onrender.com";
+
+        function triggerSearch() {
+            const query = document.getElementById('searchInput').value;
+            if(query.trim() !== "") {
+                fetchPrices(query);
+            }
+        }
+
+        function searchCategory(categoryName) {
+            document.getElementById('searchInput').value = categoryName;
+            fetchPrices(categoryName);
+        }
+
+        function fetchPrices(itemQuery) {
+            const resultsSection = document.getElementById('resultsSection');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const loading = document.getElementById('loading');
+            const resultsTitle = document.getElementById('resultsTitle');
+
+            // Show results zone and loading message
+            resultsSection.style.display = "block";
+            loading.style.display = "block";
+            resultsContainer.innerHTML = "";
+            resultsTitle.innerText = `Prices for "${itemQuery}"`;
+
+            // Scroll down cleanly to show the loader
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+
+            // Call your live Python backend scraper API
+            fetch(`${BACKEND_URL}/search?query=${encodeURIComponent(itemQuery)}`)
+                .then(response => response.json())
+                .then(data => {
+                    loading.style.display = "none";
                     
+                    if (!data || data.length === 0) {
+                        resultsContainer.innerHTML = "<p style='padding:10px; color:#7f8c8d;'>No prices found for this item from the wholesalers right now.</p>";
+                        return;
+                    }
+
+                    // Loop through products and build the rows dynamically
+                    data.forEach(product => {
+                        const productHTML = `
+                            <div class="product-card">
+                                <div class="product-details">
+                                    <h4>${product.title || 'Product Item'}</h4>
+                                    <p>Platform: <strong>${product.platform || 'Wholesaler'}</strong></p>
+                                    <a href="${product.link || '#'}" target="_blank" class="visit-btn">View Product</a>
+                                </div>
+                                <div class="product-price">
+                                    ${product.price || 'Contact Supplier'}
+                                </div>
+                            </div>
+                        `;
+                        resultsContainer.innerHTML += productHTML;
+                    });
+                })
+                .catch(error => {
+                    loading.style.display = "none";
+                    console.error("Error fetching data:", error);
+                    resultsContainer.innerHTML = "<p style='padding:10px; color:#e74c3c;'>Connection error with the engine backend. Please try again.</p>";
+                });
+        }
+    </script>
+</body>
+</html>
